@@ -21,7 +21,7 @@ let object;
 let controls;
 
 //Set which object to render
-let objToRender = 'eye';
+let objToRender = 'Appartment';
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
@@ -52,7 +52,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "dino" ? 25 : 500;
+camera.position.z = objToRender === "Appartment" ? 25 : 500;
 
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
@@ -64,7 +64,7 @@ const ambientLight = new THREE.AmbientLight(0x333333, objToRender === "dino" ? 5
 scene.add(ambientLight);
 
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
-if (objToRender === "dino") {
+if (objToRender === "Appartment") {
   controls = new OrbitControls(camera, renderer.domElement);
 }
 
@@ -74,7 +74,7 @@ function animate() {
   //Here we could add some code to update the scene, adding some automatic movement
 
   //Make the eye move
-  if (object && objToRender === "eye") {
+  if (object && objToRender === "Appartment") {
     //I've played with the constants here until it looked good 
     object.rotation.y = -3 + mouseX / window.innerWidth * 3;
     object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
