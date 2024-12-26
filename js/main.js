@@ -8,7 +8,7 @@ const scene = new THREE.Scene();
 
 // Create the Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 5, 25); // Position the camera
+camera.position.set(0, 5, 25); // Position the camera for initial view
 
 // Create the Renderer
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -16,11 +16,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 // Add Ambient Light
-const ambientLight = new THREE.AmbientLight(0xffffff, 1); // General light
+const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Bright ambient light
 scene.add(ambientLight);
 
 // Add Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Sun-like light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light simulating the sun
 directionalLight.position.set(10, 10, 10);
 scene.add(directionalLight);
 
@@ -28,21 +28,19 @@ scene.add(directionalLight);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; // Smooth camera motion
 controls.dampingFactor = 0.05;
-controls.minDistance = 2; // Minimum zoom distance
-controls.maxDistance = 100; // Maximum zoom distance
-controls.target.set(0, 5, 0); // Set the focus point (inside the apartment)
+controls.target.set(0, 0, 0); // Set the focus point (adjust as needed)
 
 // Load the GLTF Model
 const loader = new GLTFLoader();
 loader.load(
-  'models/Appartment/scene.gltf', // Path to the GLTF file
+  'models/Appartment/scene.gltf', // Correct path to the .gltf file
   function (gltf) {
     // Add the loaded model to the scene
     const object = gltf.scene;
     scene.add(object);
     console.log("Model loaded successfully!");
 
-    // Optional: Adjust object position or scale if needed
+    // Optional: Adjust object position or scale
     object.position.set(0, 0, 0);
     object.scale.set(1, 1, 1);
   },
@@ -70,3 +68,5 @@ function animate() {
   renderer.render(scene, camera); // Render the scene
 }
 animate();
+
+scene.background = new THREE.Color(0xd3d3d3); // Example: Light blue background
